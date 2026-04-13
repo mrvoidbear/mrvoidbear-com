@@ -1,0 +1,159 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { persona, about, writing } from '../data/cv';
+---
+
+<Layout
+	title={`About | ${persona.displayName}`}
+	description={about.intro}
+	ogImage="/images/voidbear3-w512.png"
+>
+	<article class="about">
+		<p class="eyebrow">/about</p>
+		<h1>About</h1>
+		<p class="tagline">{persona.tagline}</p>
+		<p>
+			Void Bear is a psuedo anonymous brand that I use to write about technology,
+			startups, and life. The industries I've worked and held positions in over
+			the last few years, have very strict social media policies and too much
+			attention brought security risks at a time that it was best to avoid it. 
+		</p>
+		<p>
+			I've been in multiple start ups. The first failed.  The second pivoted. The
+			last one was acquired.  I started off as web designer, one of those those nerds
+			that knew how to center a div and make it work in all the fragmented browser engines.
+		</p>
+		<p>
+			Many nights were lost to hacking away at learning to code. I started off wanting to
+			be a hacker or game developer and instead just ended building things.
+		</p>
+		<p> 
+			Fast forward a few start ups and jobs later; I've been a Software Engineer, Architect, Manager,
+			DevOps Engineer, IT, in security, and even held a C-Level position.
+		</p>
+		<p>
+			I'm at a point where I don't want to waste time on things that don't matter or interest me
+			or align with my values. I'm looking for a place where I can be myself, that values
+			hard work and rest, creative innovation, ownership and agency, work with talented colleagues,
+			and a sense of purpose that brings value and delight to the world all while 
+			generating revenue.  
+		</p>
+		<p>
+			I prefer documents and working sessions over meetings and presentations. I prefer 
+			taking time up front to do the hard things now to avoid losing momemtum, velocity,
+			and quality later as that tends to stack over time. I prefer pragmatism over perfection.
+			I prefer not to take shortcuts to avoid the unnessary debt, duress, and oncall fatigue later.
+		</p>
+		<p>
+			To avoid burning out, I've been tickering on the side on various libraries and projects.
+			I've found that I generally enjoy working on developer tooling, developer libraries,
+			cryptography, automation, and research and development. I keep a homelab 
+			of servers and devices to experiment with and learn from.
+		</p>
+		<p>
+			I would love to have time or an opportunity to work on led lights, IOT, robotics, 
+			AI, and other fun projects.
+		</p>
+		<p>
+			I'm currently migrating my opensource work from the <a href="https://github.com/frostyeti"> GitHub organization</a>
+			to the <a href="https://github.com/voidbear-io">voidbear.io GitHub organization</a> if you want
+			take a look at my work.
+		</p>
+
+		<section class="links" aria-labelledby="about-links">
+			<h2 id="about-links">Links</h2>
+			<ul>
+				{
+					writing.map((w) => (
+						<li>
+							<a href={w.href}>{w.label}</a>
+						</li>
+					))
+				}
+			</ul>
+		</section>
+
+		<p class="back">
+			<a href="/">← CV</a>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href="/blog">Blog</a>
+			<span class="sep" aria-hidden="true">·</span>
+			<a href="/now">Now</a>
+		</p>
+	</article>
+</Layout>
+
+<style>
+	.about {
+		max-width: 62ch;
+		padding-top: 6px;
+	}
+
+	.eyebrow {
+		margin: 0 0 8px;
+		color: var(--muted);
+		font-family: var(--mono);
+		font-size: 0.95rem;
+	}
+
+	h1 {
+		margin: 0 0 8px;
+		font-size: clamp(1.7rem, 3vw, 2.2rem);
+		letter-spacing: -0.03em;
+	}
+
+	.tagline {
+		margin: 0 0 18px;
+		color: var(--accent-strong);
+		font-size: 1.05rem;
+		line-height: 1.45;
+	}
+
+	.intro {
+		margin: 0 0 18px;
+		color: var(--muted);
+		line-height: 1.7;
+	}
+
+	.para {
+		margin: 0 0 14px;
+		color: var(--text);
+		line-height: 1.75;
+	}
+
+	.links {
+		margin-top: 28px;
+		padding-top: 22px;
+		border-top: 1px solid var(--border);
+	}
+
+	.links h2 {
+		margin: 0 0 12px;
+		font-size: 1.1rem;
+		letter-spacing: -0.02em;
+	}
+
+	.links ul {
+		margin: 0;
+		padding-left: 1.2rem;
+		color: var(--muted);
+	}
+
+	.links li {
+		margin: 8px 0;
+	}
+
+	.links a {
+		font-weight: 600;
+	}
+
+	.back {
+		margin: 32px 0 0;
+		color: var(--muted);
+	}
+
+	.sep {
+		opacity: 0.55;
+		padding: 0 0.5rem;
+	}
+</style>

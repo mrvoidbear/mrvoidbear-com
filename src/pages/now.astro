@@ -4,7 +4,7 @@ import { persona, now } from '../data/cv';
 ---
 
 <Layout
-	title={`Now — ${persona.displayName}`}
+	title={`Now | ${persona.displayName}`}
 	description={`What ${persona.displayName} is focused on lately (${now.updatedLabel}).`}
 	ogImage="/images/voidbear-w512.png"
 >
@@ -13,11 +13,11 @@ import { persona, now } from '../data/cv';
 		<h1>What I’m doing now</h1>
 		<p class="updated">Last updated: <strong>{now.updatedLabel}</strong></p>
 		<p class="lede">
-			A lightweight snapshot inspired by the <a href="https://nownownow.com/about">/now page movement</a>—less
+			A lightweight snapshot inspired by the <a href="https://nownownow.com/about">/now page movement</a>: less
 			than a blog, more than a bio.
 		</p>
 		<ul class="bullets">
-			{now.bullets.map((b) => <li>{b}</li>)}
+			{now.bullets.map((html) => <li set:html={html}></li>)}
 		</ul>
 		<p class="back">
 			<a href="/">← CV</a>

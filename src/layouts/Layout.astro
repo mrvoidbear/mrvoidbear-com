@@ -45,7 +45,7 @@ const rssHref = Astro.site ? new URL('/rss.xml', Astro.site).href : null;
 		{robots ? <meta name="robots" content={robots} /> : null}
 		{
 			rssHref ? (
-				<link rel="alternate" type="application/rss+xml" title="Void Bear — Blog" href={rssHref} />
+				<link rel="alternate" type="application/rss+xml" title="Void Bear | Blog" href={rssHref} />
 			) : null
 		}
 	</head>

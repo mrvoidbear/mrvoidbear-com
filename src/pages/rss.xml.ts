@@ -13,7 +13,7 @@ export const GET: APIRoute = async (context) => {
 	);
 
 	return rss({
-		title: 'Void Bear — Blog',
+		title: 'Void Bear | Blog',
 		description: 'Essays on engineering, platforms, and shipping.',
 		site,
 		items: posts.map((post) => ({
