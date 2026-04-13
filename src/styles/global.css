@@ -1,0 +1,145 @@
+/* Global theme: custom properties + plain CSS. Component-specific rules live in .astro <style> blocks. */
+:root {
+	color-scheme: dark;
+	--bg: #050208;
+	--bg-elevated: #0c0614;
+	--border: rgba(168, 85, 247, 0.22);
+	--text: #efe9f7;
+	--muted: rgba(239, 233, 247, 0.72);
+	--accent: #c084fc;
+	--accent-strong: #e9d5ff;
+	--glow: rgba(168, 85, 247, 0.35);
+	--radius: 14px;
+	--max: 980px;
+	--font: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, Ubuntu, Cantarell, 'Noto Sans',
+		sans-serif;
+	--mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New',
+		monospace;
+}
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	html {
+		scroll-behavior: auto;
+	}
+}
+
+body {
+	margin: 0;
+	min-height: 100vh;
+	font-family: var(--font);
+	background: radial-gradient(1200px 700px at 20% 0%, rgba(88, 28, 135, 0.35), transparent 60%),
+		radial-gradient(900px 500px at 90% 10%, rgba(168, 85, 247, 0.18), transparent 55%), var(--bg);
+	color: var(--text);
+	line-height: 1.65;
+}
+
+a {
+	color: var(--accent);
+	text-decoration-thickness: 1px;
+	text-underline-offset: 3px;
+}
+
+a:hover {
+	color: var(--accent-strong);
+}
+
+:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 3px;
+}
+
+.skip-link {
+	position: absolute;
+	left: 12px;
+	top: -120px;
+	z-index: 100;
+	padding: 10px 14px;
+	border-radius: 10px;
+	background: var(--bg-elevated);
+	border: 1px solid var(--border);
+	color: var(--text);
+	font-weight: 650;
+	text-decoration: none;
+}
+
+.skip-link:focus {
+	top: 12px;
+}
+
+code {
+	font-family: var(--mono);
+	font-size: 0.95em;
+	background: rgba(168, 85, 247, 0.12);
+	border: 1px solid rgba(168, 85, 247, 0.18);
+	padding: 0.1em 0.35em;
+	border-radius: 8px;
+}
+
+.prose {
+	max-width: 72ch;
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+	line-height: 1.25;
+	letter-spacing: -0.02em;
+}
+
+.prose pre {
+	padding: 1rem;
+	border-radius: 12px;
+	border: 1px solid var(--border);
+	background: rgba(0, 0, 0, 0.35);
+	overflow-x: auto;
+}
+
+.prose blockquote {
+	margin: 0;
+	padding-left: 1rem;
+	border-left: 3px solid rgba(168, 85, 247, 0.55);
+	color: var(--muted);
+}
+
+@media print {
+	@page {
+		margin: 1.2cm;
+	}
+
+	html {
+		background: white !important;
+	}
+
+	body {
+		background: white !important;
+		color: #111 !important;
+	}
+
+	a {
+		color: #1a1a1a !important;
+	}
+
+	.shell {
+		position: static !important;
+		background: white !important;
+		border-bottom-color: #ccc !important;
+	}
+
+	.foot {
+		border-top-color: #ccc !important;
+	}
+
+	.skip-link {
+		display: none !important;
+	}
+}

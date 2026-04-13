@@ -1,0 +1,356 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { persona, summary, focusAreas, skills, projects, experience, writing } from '../data/cv';
+---
+
+<Layout
+	title={`${persona.displayName} — CV`}
+	description={`${persona.title}. ${persona.tagline}`}
+	ogImage="/images/voidbear3-w512.png"
+>
+	<div class="page-cv">
+	<section class="hero">
+		<div class="hero-copy">
+			<p class="eyebrow">{persona.title}</p>
+			<h1>{persona.displayName}</h1>
+			<p class="tagline">{persona.tagline}</p>
+			<p class="lede">{summary}</p>
+			<div class="cta">
+				<a class="button primary" href="/blog">Read the blog</a>
+				<a class="button ghost" href="/now">Now</a>
+			</div>
+		</div>
+		<div class="hero-art" aria-hidden="true">
+			<img
+				src="/images/voidbear3-w512.png"
+				alt=""
+				width="512"
+				height="286"
+				loading="eager"
+				decoding="async"
+			/>
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Focus</h2>
+		<ul class="chips">
+			{focusAreas.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="section" aria-labelledby="skills-heading">
+		<h2 id="skills-heading">Stack & practice</h2>
+		<div class="skill-grid">
+			{
+				skills.map((group) => (
+					<div class="skill-card">
+						<h3>{group.label}</h3>
+						<ul>
+							{group.items.map((s) => (
+								<li>{s}</li>
+							))}
+						</ul>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="section" aria-labelledby="projects-heading">
+		<h2 id="projects-heading">Selected work</h2>
+		<p class="note">High-level themes only—no product or employer names.</p>
+		<div class="project-grid">
+			{
+				projects.map((p) => (
+					<article class="project">
+						<h3>{p.name}</h3>
+						<p class="role">{p.role}</p>
+						<p class="summary">{p.summary}</p>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Experience</h2>
+		<p class="note">
+			Roles are summarized without organization names—use this as a conversation starter, not a formal résumé.
+		</p>
+		<div class="roles">
+			{
+				experience.map((role) => (
+					<article class="role">
+						<div class="role-head">
+							<h3>{role.title}</h3>
+							<p class="meta">
+								<span class="period">{role.period}</span>
+								<span class="dot">·</span>
+								<span>{role.context}</span>
+							</p>
+						</div>
+						<ul>
+							{role.highlights.map((h) => (
+								<li>{h}</li>
+							))}
+						</ul>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="section">
+		<h2>Elsewhere</h2>
+		<ul class="links">
+			{
+				writing.map((w) => (
+					<li>
+						<a href={w.href}>{w.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+	</div>
+</Layout>
+
+<style>
+	.hero {
+		display: grid;
+		grid-template-columns: 1.15fr 0.85fr;
+		gap: 22px;
+		align-items: center;
+		padding: 10px 0 8px;
+	}
+
+	@media (max-width: 900px) {
+		.hero {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	.eyebrow {
+		margin: 0 0 8px;
+		color: var(--muted);
+		font-size: 0.95rem;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+	}
+
+	h1 {
+		margin: 0 0 10px;
+		font-size: clamp(2.1rem, 3.6vw, 2.8rem);
+		letter-spacing: -0.03em;
+		line-height: 1.1;
+	}
+
+	.tagline {
+		margin: 0 0 14px;
+		color: var(--accent-strong);
+		font-size: 1.05rem;
+	}
+
+	.lede {
+		margin: 0 0 18px;
+		color: var(--muted);
+		max-width: 62ch;
+	}
+
+	.cta {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+		align-items: center;
+	}
+
+	.button {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 10px 12px;
+		border-radius: 12px;
+		border: 1px solid var(--border);
+		text-decoration: none;
+		font-weight: 600;
+	}
+
+	.button.primary {
+		color: var(--bg);
+		background: linear-gradient(135deg, #d8b4fe, #a855f7);
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 0 12px 40px var(--glow);
+	}
+
+	.button.primary:hover {
+		filter: brightness(1.05);
+		color: #0b0610;
+	}
+
+	.button.ghost {
+		color: var(--text);
+		background: rgba(168, 85, 247, 0.08);
+	}
+
+	.button.ghost:hover {
+		background: rgba(168, 85, 247, 0.14);
+	}
+
+	.hero-art img {
+		width: min(520px, 100%);
+		height: auto;
+		display: block;
+		margin: 0 auto;
+		border-radius: 18px;
+		box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25), 0 24px 80px rgba(0, 0, 0, 0.55);
+	}
+
+	.section {
+		margin-top: 34px;
+		padding-top: 26px;
+		border-top: 1px solid var(--border);
+	}
+
+	h2 {
+		margin: 0 0 14px;
+		font-size: 1.25rem;
+		letter-spacing: -0.02em;
+	}
+
+	.chips {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex;
+		flex-wrap: wrap;
+		gap: 10px;
+	}
+
+	.chips li {
+		padding: 8px 10px;
+		border: 1px solid rgba(168, 85, 247, 0.22);
+		border-radius: 999px;
+		background: rgba(168, 85, 247, 0.08);
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.note {
+		margin: 0 0 16px;
+		color: var(--muted);
+		max-width: 78ch;
+	}
+
+	.roles {
+		display: grid;
+		gap: 14px;
+	}
+
+	.role {
+		padding: 16px;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+		background: linear-gradient(180deg, rgba(168, 85, 247, 0.08), rgba(0, 0, 0, 0.15));
+	}
+
+	.role h3 {
+		margin: 0 0 6px;
+		font-size: 1.05rem;
+	}
+
+	.meta {
+		margin: 0 0 12px;
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.dot {
+		opacity: 0.55;
+		padding: 0 6px;
+	}
+
+	.role ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		color: var(--text);
+	}
+
+	.role li {
+		margin: 6px 0;
+	}
+
+	.links {
+		margin: 0;
+		padding-left: 1.1rem;
+		color: var(--muted);
+	}
+
+	.links a {
+		font-weight: 600;
+	}
+
+	.skill-grid {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 14px;
+	}
+
+	.skill-card {
+		padding: 14px 16px;
+		border-radius: var(--radius);
+		border: 1px solid var(--border);
+		background: rgba(0, 0, 0, 0.2);
+	}
+
+	.skill-card h3 {
+		margin: 0 0 10px;
+		font-size: 0.82rem;
+		text-transform: uppercase;
+		letter-spacing: 0.06em;
+		color: var(--muted);
+		font-weight: 650;
+	}
+
+	.skill-card ul {
+		margin: 0;
+		padding-left: 1.1rem;
+		color: var(--text);
+		font-size: 0.96rem;
+	}
+
+	.skill-card li {
+		margin: 4px 0;
+	}
+
+	.project-grid {
+		display: grid;
+		gap: 14px;
+	}
+
+	.project {
+		padding: 16px;
+		border-radius: var(--radius);
+		border: 1px solid rgba(168, 85, 247, 0.2);
+		background: linear-gradient(135deg, rgba(168, 85, 247, 0.06), rgba(0, 0, 0, 0.12));
+	}
+
+	.project h3 {
+		margin: 0 0 6px;
+		font-size: 1.08rem;
+		letter-spacing: -0.02em;
+	}
+
+	.project .role {
+		margin: 0 0 10px;
+		font-size: 0.92rem;
+		color: var(--accent-strong);
+		font-weight: 600;
+	}
+
+	.project .summary {
+		margin: 0;
+		color: var(--muted);
+		font-size: 0.98rem;
+	}
+</style>

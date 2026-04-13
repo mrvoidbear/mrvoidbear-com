@@ -1,0 +1,8 @@
+# Cloudflare Pages: connect this repo and use:
+# - Build command: bun run build
+# - Build output directory: dist
+# https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/
+
+name = "mrvoidbear-com"
+pages_build_output_dir = "dist"
+compatibility_date = "2025-11-01"

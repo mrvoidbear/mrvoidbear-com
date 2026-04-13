@@ -1,0 +1,119 @@
+---
+const rawPath = Astro.url.pathname;
+const path = rawPath.replace(/\/$/, '') || '/';
+
+const nav = [
+	{ href: '/', label: 'CV' },
+	{ href: '/now', label: 'Now' },
+	{ href: '/blog', label: 'Blog' },
+];
+
+function isActive(href: string) {
+	const base = href.replace(/\/$/, '') || '/';
+	if (base === '/') return path === '/';
+	return path === base || path.startsWith(`${base}/`);
+}
+---
+
+<header class="shell">
+	<div class="bar">
+		<nav class="nav" aria-label="Primary">
+			{
+				nav.map((item) => (
+					<a class:list={['nav-link', { active: isActive(item.href) }]} href={item.href}>
+						{item.label}
+					</a>
+				))
+			}
+		</nav>
+		<a class="brand" href="/">
+			<img
+				class="brand-logo"
+				src="/images/logo-header.png"
+				alt=""
+				width="64"
+				height="64"
+				loading="eager"
+				decoding="async"
+			/>
+			<span class="brand-text">Void Bear</span>
+		</a>
+	</div>
+</header>
+
+<style>
+	.shell {
+		position: sticky;
+		top: 0;
+		z-index: 20;
+		backdrop-filter: blur(10px);
+		background: linear-gradient(to bottom, rgba(5, 2, 8, 0.92), rgba(5, 2, 8, 0.65));
+		border-bottom: 1px solid var(--border);
+	}
+
+	.bar {
+		max-width: var(--max);
+		margin: 0 auto;
+		padding: 18px 18px;
+		min-height: calc(64px + 36px);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 16px;
+		flex-wrap: wrap;
+	}
+
+	.brand {
+		display: inline-flex;
+		align-items: center;
+		gap: 10px;
+		color: var(--text);
+		text-decoration: none;
+		font-weight: 650;
+		letter-spacing: -0.02em;
+	}
+
+	.brand:hover {
+		color: var(--accent-strong);
+	}
+
+	.brand-logo {
+		display: block;
+		flex-shrink: 0;
+		width: 64px;
+		height: 64px;
+		border-radius: 12px;
+		box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.22), 0 8px 24px rgba(0, 0, 0, 0.5);
+		image-rendering: crisp-edges;
+	}
+
+	.brand-text {
+		font-size: 0.98rem;
+	}
+
+	.nav {
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+
+	.nav-link {
+		padding: 8px 10px;
+		border-radius: 10px;
+		color: var(--muted);
+		text-decoration: none;
+		border: 1px solid transparent;
+	}
+
+	.nav-link:hover {
+		color: var(--text);
+		border-color: rgba(168, 85, 247, 0.22);
+		background: rgba(168, 85, 247, 0.08);
+	}
+
+	.nav-link.active {
+		color: var(--accent-strong);
+		border-color: rgba(168, 85, 247, 0.35);
+		background: rgba(168, 85, 247, 0.12);
+	}
+</style>

@@ -1,0 +1,68 @@
+---
+import '../styles/global.css';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+
+type Props = {
+	title: string;
+	description?: string;
+	ogImage?: string;
+	/** Set on error pages, etc. */
+	robots?: string;
+};
+
+const {
+	title,
+	description = 'Software engineering notes and CV.',
+	ogImage = '/images/voidbear3-w512.png',
+	robots,
+} = Astro.props as Props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const absoluteOg = new URL(ogImage, Astro.site);
+const rssHref = Astro.site ? new URL('/rss.xml', Astro.site).href : null;
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<link rel="icon" href="/favicon.ico" sizes="any" />
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16.png" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical.toString()} />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:type" content="website" />
+		<meta property="og:url" content={canonical.toString()} />
+		<meta property="og:image" content={absoluteOg.toString()} />
+		<meta name="twitter:card" content="summary_large_image" />
+		{robots ? <meta name="robots" content={robots} /> : null}
+		{
+			rssHref ? (
+				<link rel="alternate" type="application/rss+xml" title="Void Bear — Blog" href={rssHref} />
+			) : null
+		}
+	</head>
+	<body>
+		<a class="skip-link" href="#main-content">Skip to content</a>
+		<SiteHeader />
+		<main id="main-content" class="main" tabindex="-1">
+			<slot />
+		</main>
+		<SiteFooter />
+	</body>
+</html>
+
+<style>
+	.main {
+		max-width: var(--max);
+		margin: 0 auto;
+		padding: 28px 18px 10px;
+	}
+</style>

@@ -1,0 +1,98 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+export async function getStaticPaths() {
+	const posts = await getCollection('blog');
+	return posts.map((post) => ({
+		params: { slug: post.id },
+		props: { post },
+	}));
+}
+
+type Props = {
+	post: CollectionEntry<'blog'>;
+};
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+
+const og = post.data.heroImage ?? '/images/voidbear-w512.png';
+---
+
+<Layout title={`${post.data.title} — Void Bear`} description={post.data.description} ogImage={og}>
+	<article class="prose wrap">
+		<p class="crumb">
+			<a href="/blog">Blog</a>
+			<span class="sep">/</span>
+		</p>
+		<h1>{post.data.title}</h1>
+		<p class="meta">
+			Published{' '}
+			<time datetime={post.data.pubDate.toISOString()}>
+				{
+					post.data.pubDate.toLocaleDateString('en-US', {
+						year: 'numeric',
+						month: 'long',
+						day: 'numeric',
+					})
+				}
+			</time>
+			{
+				post.data.updatedDate ? (
+					<>
+						{' '}
+						· Updated{' '}
+						<time datetime={post.data.updatedDate.toISOString()}>
+							{post.data.updatedDate.toLocaleDateString('en-US', {
+								year: 'numeric',
+								month: 'long',
+								day: 'numeric',
+							})}
+						</time>
+					</>
+				) : null
+			}
+		</p>
+		<div class="content">
+			<Content />
+		</div>
+	</article>
+</Layout>
+
+<style>
+	.wrap {
+		padding-top: 6px;
+	}
+
+	.crumb {
+		margin: 0 0 10px;
+		color: var(--muted);
+		font-size: 0.95rem;
+	}
+
+	.sep {
+		opacity: 0.55;
+		padding: 0 8px;
+	}
+
+	h1 {
+		margin: 0 0 10px;
+		font-size: clamp(1.8rem, 3.2vw, 2.4rem);
+		letter-spacing: -0.03em;
+		line-height: 1.15;
+	}
+
+	.meta {
+		margin: 0 0 22px;
+		color: var(--muted);
+	}
+
+	.content :global(p) {
+		margin: 0 0 14px;
+	}
+
+	.content :global(li) {
+		margin: 8px 0;
+	}
+</style>
