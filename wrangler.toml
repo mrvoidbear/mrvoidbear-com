@@ -1,8 +1,9 @@
-# Cloudflare Pages: connect this repo and use:
-# - Build command: bun run build
-# - Build output directory: dist
-# https://developers.cloudflare.com/pages/framework-guides/deploy-an-astro-site/
+# Cloudflare Workers (Astro + @astrojs/cloudflare).
+# After `bun run build`, deploy with: `bun run deploy` (uses `dist/server/wrangler.json`).
+#
+# https://docs.astro.build/en/guides/integrations-guide/cloudflare/
 
 name = "mrvoidbear-com"
-pages_build_output_dir = "dist"
 compatibility_date = "2025-11-01"
+# Session driver (lru-cache) and some dependencies expect Node.js APIs in the worker bundle.
+compatibility_flags = [ "nodejs_compat" ]

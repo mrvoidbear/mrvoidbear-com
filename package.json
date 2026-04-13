@@ -9,16 +9,19 @@
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
+    "deploy": "wrangler deploy --config dist/server/wrangler.json",
     "check": "astro check",
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/cloudflare": "^13.1.8",
     "@astrojs/rss": "^4.0.18",
     "@astrojs/sitemap": "^3.7.2",
     "astro": "^6.1.5"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.5",
-    "typescript": "^5.9.0"
+    "typescript": "^5.9.0",
+    "wrangler": "^4.81.1"
   }
 }
